@@ -70,4 +70,8 @@ public class QuestionService {
     }
 
 
+    @Transactional(readOnly = true)
+    public Page<Question> findByQuery(String query, Pageable pageable) {
+        return questionRepository.findByQuery(query, pageable);
+    }
 }
