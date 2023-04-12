@@ -1,6 +1,6 @@
 package pl.ignacbartosz.bank.category.controller;
 
-import jakarta.validation.Valid;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,10 +14,10 @@ import pl.ignacbartosz.bank.category.domain.model.Category;
 import pl.ignacbartosz.bank.category.service.CategoryService;
 import pl.ignacbartosz.bank.common.dto.Message;
 
-import java.util.List;
+import javax.validation.Valid;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
+import static pl.ignacbartosz.bank.common.controller.ControllerUtils.paging;
 
 @Controller
 @RequestMapping("/admin/categories")
@@ -96,12 +96,5 @@ public class CategoryAdminViewController {
         return "redirect:/admin/categories";
     }
 
-    private void paging(Model model, Page page) {
-        int totalPages = page.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
-    }
 
 }

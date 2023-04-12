@@ -1,6 +1,8 @@
 package pl.ignacbartosz.bank.question.service;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ignacbartosz.bank.question.domain.model.Question;
@@ -56,4 +58,16 @@ public class QuestionService {
     public List<Question> findAllByCategoryId(UUID id) {
         return questionRepository.findAllByCategoryId(id);
     }
+
+    @Transactional(readOnly = true)
+    public Page<Question> findHot(Pageable pageable) {
+        return questionRepository.findHot(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Question> findUnanswered(Pageable pageable) {
+        return questionRepository.findUnanswered(pageable);
+    }
+
+
 }

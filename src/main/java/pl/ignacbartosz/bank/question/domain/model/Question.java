@@ -1,8 +1,9 @@
 package pl.ignacbartosz.bank.question.domain.model;
 
-import jakarta.persistence.*;
+
 import pl.ignacbartosz.bank.category.domain.model.Category;
 
+import javax.persistence.*;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
