@@ -1,6 +1,9 @@
 package pl.ignacbartosz.bank.question.domain.model;
 
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import pl.ignacbartosz.bank.category.domain.model.Category;
 
 import javax.persistence.*;
@@ -11,6 +14,9 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "questions")
+@Getter
+@Setter
+@ToString
 public class Question {
 
     @Id
@@ -47,36 +53,4 @@ public class Question {
         return this;
     }
 
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }
