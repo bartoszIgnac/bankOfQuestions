@@ -7,6 +7,7 @@ import lombok.ToString;
 import pl.ignacbartosz.bank.category.domain.model.Category;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -26,8 +27,13 @@ public class Question {
     @ManyToOne
     private Category category;
 
+
     @OneToMany(mappedBy = "question")
     private Set<Answer> answers;
+
+    private LocalDateTime created;
+
+    private LocalDateTime modified;
 
     public Question() {
         this.id = UUID.randomUUID();
@@ -36,6 +42,17 @@ public class Question {
     public Question(String name) {
         this();
         this.name = name;
+    }
+
+    @PrePersist
+    void prePersist() {
+        created = LocalDateTime.now();
+        modified = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void preUpdate() {
+        modified = LocalDateTime.now();
     }
 
     public Set<Answer> getAnswers() {

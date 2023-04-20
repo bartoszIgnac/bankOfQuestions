@@ -38,5 +38,6 @@ public class CategoryViewController extends BankCommonViewController {
         return "category/single";
     }
 
+
 }
 

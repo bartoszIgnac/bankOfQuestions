@@ -1,6 +1,6 @@
 package pl.ignacbartosz.bank.category.controller;
 
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +21,7 @@ import static pl.ignacbartosz.bank.common.controller.ControllerUtils.paging;
 
 @Controller
 @RequestMapping("/admin/categories")
+@Slf4j
 public class CategoryAdminViewController {
 
     private final CategoryService categoryService;
@@ -82,6 +83,7 @@ public class CategoryAdminViewController {
             categoryService.updateCategory(id, category);
             ra.addFlashAttribute("message", Message.info("Kategoria zapisana"));
         } catch (Exception e) {
+            log.error("Error on category.edit", e);
             model.addAttribute("category", category);
             model.addAttribute("message", Message.error("Nieznany błąd zapisu"));
             return "admin/category/edit";
@@ -91,8 +93,15 @@ public class CategoryAdminViewController {
 
     @GetMapping("{id}/delete")
     public String deleteView(@PathVariable UUID id, RedirectAttributes ra) {
-        categoryService.deleteCategory(id);
-        ra.addFlashAttribute("message", Message.info("Kategoria usunięta"));
+        try {
+            categoryService.deleteCategory(id);
+            ra.addFlashAttribute("message", Message.info("Kategoria usunięta"));
+        } catch (Exception e) {
+            log.error("Error on category.delete", e);
+            ra.addFlashAttribute("message", Message.error("Nieznany błąd podczas usuwania"));
+            return "redirect:/admin/categories";
+        }
+
         return "redirect:/admin/categories";
     }
 

@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ignacbartosz.bank.category.domain.model.Category;
 import pl.ignacbartosz.bank.category.domain.repository.CategoryRepository;
+import pl.ignacbartosz.bank.category.dto.CategoryWithStatisticsDto;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -59,6 +61,11 @@ public class CategoryService {
     @Transactional
     public void deleteCategory(UUID id) {
         categoryRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoryWithStatisticsDto> findAllWithStatistics() {
+        return categoryRepository.findAllWithStatistics();
     }
 
 }

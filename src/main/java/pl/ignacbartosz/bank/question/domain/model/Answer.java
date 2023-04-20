@@ -25,6 +25,8 @@ public class Answer {
     @ManyToOne
     private Question question;
 
+    private boolean correct;
+
     public Answer() {
         this.id = UUID.randomUUID();
     }
