@@ -64,16 +64,6 @@ public class QuestionService {
         return questionRepository.findAllByCategoryId(id, Pageable.unpaged());
     }
 
-    @Transactional(readOnly = true)
-    public Page<Question> findHot(Pageable pageable) {
-        return questionRepository.findHot(pageable);
-    }
-
-    @Transactional(readOnly = true)
-    public Page<Question> findUnanswered(Pageable pageable) {
-        return questionRepository.findUnanswered(pageable);
-    }
-
 
     @Transactional(readOnly = true)
     public Page<Question> findByQuery(String query, Pageable pageable) {

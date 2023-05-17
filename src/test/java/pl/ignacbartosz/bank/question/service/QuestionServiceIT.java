@@ -9,7 +9,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import pl.ignacbartosz.bank.category.domain.model.Category;
 import pl.ignacbartosz.bank.category.domain.repository.CategoryRepository;
-import pl.ignacbartosz.bank.question.domain.model.Answer;
 import pl.ignacbartosz.bank.question.domain.model.Question;
 import pl.ignacbartosz.bank.question.domain.repository.AnswerRepository;
 import pl.ignacbartosz.bank.question.domain.repository.QuestionRepository;
@@ -143,55 +142,6 @@ class QuestionServiceIT {
                 .containsExactlyInAnyOrder("Question1", "Question2");
     }
 
-    @Test
-    void shouldFindHot() {
-        // given
-        questionRepository.deleteAll();
-
-        Question question1 = new Question("Question1");
-        Question question2 = new Question("Question2");
-        Question question3 = new Question("Question3");
-
-        questionRepository.saveAll(List.of(question1, question2, question3));
-
-        Answer answer = new Answer("Answer");
-        question2.addAnswer(answer);
-        answerRepository.save(answer);
-
-        // when
-        Page<Question> result = questionService.findHot(Pageable.unpaged());
-
-        // then
-        assertThat(result)
-                .hasSize(3)
-                .extracting(Question::getName)
-                .containsExactlyInAnyOrder("Question2", "Question1", "Question3");
-    }
-
-    @Test
-    void shouldFindUnanswered() {
-        // given
-        questionRepository.deleteAll();
-
-        Question question1 = new Question("Question1");
-        Question question2 = new Question("Question2");
-        Question question3 = new Question("Question3");
-
-        questionRepository.saveAll(List.of(question1, question2, question3));
-
-        Answer answer = new Answer("Answer");
-        question2.addAnswer(answer);
-        answerRepository.save(answer);
-
-        // when
-        Page<Question> result = questionService.findUnanswered(Pageable.unpaged());
-
-        // then
-        assertThat(result)
-                .hasSize(2)
-                .extracting(Question::getName)
-                .containsExactlyInAnyOrder("Question1", "Question3");
-    }
 
     @Test
     void shouldFindByQuery() {

@@ -2,11 +2,12 @@ package pl.ignacbartosz.bank.question.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.ignacbartosz.bank.BankConfiguration;
 import pl.ignacbartosz.bank.category.service.CategoryService;
 import pl.ignacbartosz.bank.common.controller.BankCommonViewController;
@@ -15,8 +16,6 @@ import pl.ignacbartosz.bank.question.service.AnswerService;
 import pl.ignacbartosz.bank.question.service.QuestionService;
 
 import java.util.UUID;
-
-import static pl.ignacbartosz.bank.common.controller.ControllerUtils.paging;
 
 @Controller
 @RequestMapping("/questions")
@@ -58,37 +57,6 @@ public class QuestionViewController extends BankCommonViewController {
         return "redirect:/questions";
     }
 
-    @GetMapping("hot")
-    public String hotView(
-            @RequestParam(name = "page", defaultValue = "1") int page,
-            Model model
-    ) {
-        PageRequest pageRequest = PageRequest.of(page - 1, bankConfiguration.getPagingPageSize());
-
-        Page<Question> questionsPage = questionsService.findHot(pageRequest);
-
-        model.addAttribute("questionsPage", questionsPage);
-        paging(model, questionsPage);
-        addGlobalAttributes(model);
-
-        return "question/index";
-    }
-
-    @GetMapping("unanswered")
-    public String unansweredView(
-            @RequestParam(name = "page", defaultValue = "1") int page,
-            Model model
-    ) {
-        PageRequest pageRequest = PageRequest.of(page - 1, bankConfiguration.getPagingPageSize());
-
-        Page<Question> questionsPage = questionsService.findUnanswered(pageRequest);
-
-        model.addAttribute("questionsPage", questionsPage);
-        paging(model, questionsPage);
-        addGlobalAttributes(model);
-
-        return "question/index";
-    }
 
 
 }
