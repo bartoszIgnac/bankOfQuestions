@@ -20,7 +20,7 @@ Projekt został napisany w języku Java z wykorzystaniem frameworka Spring Boot 
 
 ## Zastosowane technologie
 ### ⛓️ Development
-- [Java 18](https://openjdk.org/projects/jdk/18/)
+- [Java 17](https://openjdk.org/projects/jdk/17/)
 - [Spring Boot 2](https://spring.io/projects/spring-boot)
 - [Spring Data](https://spring.io/projects/spring-data)
 - [PostgreSQL (docker)](https://www.postgresql.org/)
@@ -33,13 +33,13 @@ Projekt został napisany w języku Java z wykorzystaniem frameworka Spring Boot 
 - [Mockito](https://site.mockito.org/)
 
 ## 👉 Zrzuty ekranu
-![Test main-site](./images/Main-site.png)
+![Test main-site](./images/home.jpg)
 
 ## 🧰 Wymagane aplikacje/narzędzia
 Do uruchomienia aplikacji wymagana jest instalacja następujących narzędzi:
 
 - [IntelliJ IDEA](https://www.jetbrains.com/idea/),
-- [Java 18](https://openjdk.org/projects/jdk/18/)
+- [Java 17](https://openjdk.org/projects/jdk/18/)
 - [Maven 3.x](https://maven.apache.org/download.cgi),
 - [Docker](https://docs.docker.com/get-docker/)
 
@@ -47,7 +47,7 @@ Do uruchomienia aplikacji wymagana jest instalacja następujących narzędzi:
 
 Aby rozpocząć należy sklonować repozytorium lokalnie:
 
-- git clone: [https://github.com/bartoszIgnac/bankOfQuestions.git]
+- git clone: https://github.com/bartoszIgnac/bankOfQuestions.git
 
 W celu uruchomienia aplikacji z profilu:
 
